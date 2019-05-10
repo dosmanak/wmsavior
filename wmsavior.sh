@@ -20,7 +20,7 @@
 # you can use the script to restore windows arrangement.
 # Created by dosmanak.
 
-STORFILE="$(dirname $(realpath ./$0))/saved.wmctrl"
+STORFILE="$(dirname $(realpath $0))/saved.wmctrl"
 
 
 if [ "$1" == "save" ]; then
