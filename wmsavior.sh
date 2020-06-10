@@ -30,7 +30,7 @@ if [ "$1" == "save" ]; then
     # Although I tried to get precise position using xwininfo, I had to subtract
     # 15px from y position (Mint Cinnamon). May differ on your window manager.
     echo $window_id $desktop_id $((${x_offset}-${offset[0]})) \
-      $((${y_offset}-15-${offset[1]}-${offset[0]})) $width $height $junk >> $STORFILE
+      $((${y_offset}-15-${offset[1]})) $width $height $junk >> $STORFILE
   done
 
 elif [ "$1" == "restore" ]; then
