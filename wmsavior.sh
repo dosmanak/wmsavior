@@ -20,8 +20,12 @@
 # you can use the script to restore windows arrangement.
 # Created by dosmanak.
 
-STORFILE="$(dirname $(realpath $0))/saved.wmctrl"
+# Set X_OFFSET and Y_OFFSET in you environment (.bashrc) to fine tune the
+# wmsavior for four Desktop Environment
+: ${X_OFFSET=-1}
+: ${Y_OFFSET=26}
 
+STORFILE="$(dirname $(realpath $0))/saved.wmctrl"
 
 if [ "$1" == "save" ]; then
   rm $STORFILE
@@ -29,8 +33,8 @@ if [ "$1" == "save" ]; then
     offset=($(xwininfo -id $window_id |grep Relative | awk '{print $NF}'|xargs))
     # Although I tried to get precise position using xwininfo, I had to subtract
     # 15px from y position (Mint Cinnamon). May differ on your window manager.
-    echo $window_id $desktop_id $((${x_offset}-${offset[0]})) \
-      $((${y_offset}-15-${offset[1]})) $width $height $junk >> $STORFILE
+    echo $window_id $desktop_id $((${x_offset}-${offset[0]}+${X_OFFSET})) \
+      $((${y_offset}-${offset[1]}-${Y_OFFSET})) $width $height $junk >> $STORFILE
   done
 
 elif [ "$1" == "restore" ]; then
